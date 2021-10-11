@@ -1,6 +1,6 @@
 {
-  "name": "rregeer/phpunit-coverage-check",
-  "description": "Check the code coverage using the clover report of phpunit",
+  "name": "robiningelbrecht/phpunit-coverage-check",
+  "description": "Check the code coverage using the clover or text report of phpunit",
   "keywords": [
     "Testing",
     "PHP",
@@ -12,12 +12,21 @@
   "license": "MIT",
   "authors": [
     {
+      "name": "Robin Ingelbrecht",
+      "email": "ingelbrecht_robin@hotmail.com"
+    },
+    {
       "name": "Richard Regeer",
       "email": "rich2309@gmail.com"
     }
   ],
   "require": {
-    "php": ">=7.0.0"
+    "php": ">=7.4"
   },
-  "bin": ["bin/coverage-check"]
+  "bin": ["bin/coverage-check"],
+  "autoload": {
+    "psr-4": {
+      "PHPUnitCoverageChecker\\": "src/"
+    }
+  }
 }
