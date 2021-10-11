@@ -6,5 +6,5 @@ use PHPUnitCoverageChecker\Metrics;
 
 interface Processor
 {
-    public function getMetrics(): Metrics;
+    public function getMetrics(string $file): Metrics;
 }

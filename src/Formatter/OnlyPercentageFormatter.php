@@ -6,12 +6,12 @@ class OnlyPercentageFormatter implements Formatter
 {
     public function formatSuccessMessage(float $expected_coverage, float $actual_coverage): string
     {
-        return $actual_coverage;
+        return sprintf('%0.2f', $actual_coverage);
     }
 
     public function formatErrorMessage(float $expected_coverage, float $actual_coverage): string
     {
-        return $actual_coverage;
+        return sprintf('%0.2f', $actual_coverage);
     }
 
 

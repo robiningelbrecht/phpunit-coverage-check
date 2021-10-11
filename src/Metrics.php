@@ -4,33 +4,30 @@ namespace PHPUnitCoverageChecker;
 
 class Metrics
 {
-    private Metric $classes;
+    private Metric $elements;
+    private Metric $statements;
     private Metric $methods;
-    private Metric $lines;
 
-    public function __construct(
-        Metric $classes,
-        Metric $methods,
-        Metric $lines)
+    public function __construct(Metric $elements, Metric $statements, Metric $methods)
     {
-        $this->classes = $classes;
+        $this->elements = $elements;
+        $this->statements = $statements;
         $this->methods = $methods;
-        $this->lines = $lines;
     }
 
-    public function getClasses(): Metric
+    public function getElements(): Metric
     {
-        return $this->classes;
+        return $this->elements;
+    }
+
+    public function getStatements(): Metric
+    {
+        return $this->statements;
     }
 
     public function getMethods(): Metric
     {
         return $this->methods;
-    }
-
-    public function getLines(): Metric
-    {
-        return $this->lines;
     }
 
 }

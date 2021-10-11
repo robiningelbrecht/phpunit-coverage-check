@@ -34,12 +34,25 @@ class CoverageChecker
 
     private function getActualCoveragePercentage(): float
     {
-        return 82;
+        $covered_metrics = $this->metrics->getElements()->getCovered()
+            + $this->metrics->getMethods()->getCovered()
+            + $this->metrics->getStatements()->getCovered();
+
+        $total_metrics = $this->metrics->getElements()->getTotal()
+            + $this->metrics->getMethods()->getTotal()
+            + $this->metrics->getStatements()->getTotal();
+
+        if ($total_metrics === 0) {
+            throw new \Exception('Insufficient data for calculation. Please add more code');
+        }
+
+
+        return $covered_metrics / $total_metrics * 100;
     }
 
     private function getMetrics(): Metrics
     {
-        return $this->processor->getMetrics();
+        return $this->processor->getMetrics($this->file);
     }
 
     private function formatOutput(): string
