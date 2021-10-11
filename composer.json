@@ -23,7 +23,7 @@
   "require": {
     "php": ">=7.4"
   },
-  "bin": ["bin/coverage-check"],
+  "bin": ["bin/coverage-checker"],
   "autoload": {
     "psr-4": {
       "PHPUnitCoverageChecker\\": "src/"
