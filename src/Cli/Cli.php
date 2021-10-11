@@ -44,6 +44,6 @@ class Cli
 
     public function success(string $string): void
     {
-        $this->output($string, 'greed');
+        $this->output($string, 'green');
     }
 }

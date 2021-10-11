@@ -2,7 +2,9 @@
 
 namespace PHPUnitCoverageChecker\Processor;
 
+use PHPUnitCoverageChecker\Metrics;
+
 interface Processor
 {
-
+    public function getMetrics(): Metrics;
 }

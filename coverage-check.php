@@ -44,13 +44,10 @@ try {
     exit(STATUS_ERROR);
 }
 
-$output = $coverage_checker
-    ->format()
-    ->getOutput();
-
+$output = $coverage_checker->getOutput();
 $coverage_checker->validates() ? $cli->success($output) : $cli->error($output);
 
-if (isset($cli->getOptions()['exit-on-low-coverage']) && !$coverage_checker->validates()) {
+if (array_key_exists('exit-on-low-coverage', $cli->getOptions()) && !$coverage_checker->validates()) {
     exit(STATUS_ERROR);
 }
 exit(STATUS_OK);

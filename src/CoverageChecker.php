@@ -11,13 +11,15 @@ class CoverageChecker
 {
 
     private string $file;
-    private int $minPercentage;
+    private float $minPercentage;
     private Formatter $formatter;
     private Processor $processor;
+    private Metrics $metrics;
+    private string $output;
 
     private function __construct(
         string $file,
-        int $minPercentage,
+        float $minPercentage,
         Formatter $formatter,
         Processor $processor)
     {
@@ -25,22 +27,38 @@ class CoverageChecker
         $this->minPercentage = $minPercentage;
         $this->formatter = $formatter;
         $this->processor = $processor;
+
+        $this->metrics = $this->getMetrics();
+        $this->output = $this->formatOutput();
     }
 
-    public function process(): self{
-        return $this;
+    private function getActualCoveragePercentage(): float
+    {
+        return 82;
     }
 
-    public function format(): self{
-        return $this;
+    private function getMetrics(): Metrics
+    {
+        return $this->processor->getMetrics();
     }
 
-    public function getOutput(): string{
-        return 'test';
+    private function formatOutput(): string
+    {
+        if ($this->validates()) {
+            return $this->formatter->formatSuccessMessage($this->minPercentage, $this->getActualCoveragePercentage());
+        }
+
+        return $this->formatter->formatErrorMessage($this->minPercentage, $this->getActualCoveragePercentage());
     }
 
-    public function validates(): bool{
-        return false;
+    public function getOutput(): string
+    {
+        return $this->output;
+    }
+
+    public function validates(): bool
+    {
+        return $this->getActualCoveragePercentage() >= $this->minPercentage;
     }
 
     public static function fromScriptArguments(array $arguments, array $options = []): self
@@ -48,7 +66,7 @@ class CoverageChecker
         self::guardValidArguments($arguments);
 
         $options = array_merge([
-            'formatter' => FormatterFactory::ONLY_PERCENTAGE,
+            'formatter' => FormatterFactory::MESSAGE,
             'processor' => ProcessorFactory::CLOVER_COVERAGE,
         ], $options);
 
