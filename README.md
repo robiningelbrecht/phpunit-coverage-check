@@ -20,19 +20,9 @@ Run the script:
 
 ```bash
 vendor/bin/phpunit --coverage-clover clover.xml
-vendor/bin/coverage-check clover.xml 80
-vendor/bin/coverage-check clover.xml 80 --only-percentage
+vendor/bin/coverage-checker clover.xml 80
+vendor/bin/coverage-checker clover.xml 80 --formatter=only-percentage
+vendor/bin/coverage-checker clover.xml 80 --formatter=message --processor=clover-coverage --exit-on-low-coverage
 ```
 
 With the `--only-percentage` enabled, the CLI command will only return the resulting coverage percentage.
-
-It's also possible to add the coverage report generation to the phpunit.xml.dist add to following line to the xml file:
-
-```xml
-<logging>
-    <log type="coverage-clover" target="clover.xml"/>
-</logging>
-```
-
-For more information see the [phpunit documentation](https://phpunit.de/manual/5.3/en/index.html).
-Information about the [configuration file](https://phpunit.de/manual/5.3/en/appendixes.configuration.html#appendixes.configuration) and [commandline options](https://phpunit.de/manual/current/en/textui.html#textui.clioptions).

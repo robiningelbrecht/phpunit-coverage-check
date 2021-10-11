@@ -100,7 +100,7 @@ class CoverageChecker
             throw new \InvalidArgumentException(sprintf('Invalid input file "%s" provided.', $arguments[1]));
         }
 
-        if (!isset($arguments[1]) || !is_numeric($arguments[1]) || intval($arguments[1]) < 0 || intval($arguments[1]) > 100) {
+        if (!isset($arguments[1]) || !is_numeric($arguments[1]) || intval($arguments[1]) < 1 || intval($arguments[1]) > 100) {
             throw new \InvalidArgumentException(sprintf('Invalid percentage "%s" provided. Provide an integer between 0 - 100', $arguments[1]));
         }
     }
