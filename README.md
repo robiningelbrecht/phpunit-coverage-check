@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/richardregeer/phpunit-coverage-check.svg?branch=master)](https://travis-ci.org/richardregeer/phpunit-coverage-check)
-
 # phpunit-coverage-check
 This php script will read the clover xml report from phpunit and calculates the coverage score. Based on the given threshold the script will exit ok of the coverage is higher then the threshold or exit with code 1 if the coverage is lower then the threshold.
 This script can be used in your continuous deployment environment or for example added to a pre-commit hook.
