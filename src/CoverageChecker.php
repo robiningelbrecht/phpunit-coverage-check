@@ -9,7 +9,6 @@ use PHPUnitCoverageChecker\Processor\ProcessorFactory;
 
 class CoverageChecker
 {
-
     private string $file;
     private float $minPercentage;
     private Formatter $formatter;
@@ -45,7 +44,7 @@ class CoverageChecker
             $total_metrics += $metric->getTotal();
         }
 
-        if ($total_metrics === 0) {
+        if (0 === $total_metrics) {
             throw new \Exception('Insufficient data for calculation. Please add more code');
         }
 
@@ -85,7 +84,7 @@ class CoverageChecker
             intval($arguments[1]),
             FormatterFactory::fromString($options['formatter']),
             ProcessorFactory::fromString($options['processor']),
-            !empty($options['enabled-metrics']) ? explode(',', $options['enabled-metrics']): [],
+            !empty($options['enabled-metrics']) ? explode(',', $options['enabled-metrics']) : [],
         );
     }
 
@@ -102,5 +101,4 @@ class CoverageChecker
             throw new \InvalidArgumentException(sprintf('Invalid percentage "%s" provided. Provide an integer between 0 - 100', $arguments[1]));
         }
     }
-
 }

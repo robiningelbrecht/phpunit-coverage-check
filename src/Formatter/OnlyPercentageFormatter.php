@@ -13,6 +13,4 @@ class OnlyPercentageFormatter implements Formatter
     {
         return sprintf('%0.2f', $actual_coverage);
     }
-
-
 }

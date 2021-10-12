@@ -2,7 +2,6 @@
 
 namespace PHPUnitCoverageChecker\Processor;
 
-use http\Exception\InvalidArgumentException;
 use PHPUnitCoverageChecker\Metric;
 
 class CloverCoverageProcessor implements Processor
@@ -29,20 +28,20 @@ class CloverCoverageProcessor implements Processor
         $counts = [];
         foreach ($xml->xpath(self::XPATH_METRICS) as $metric) {
             if (in_array(self::METRIC_ELEMENTS, $enabled_metrics)) {
-                $counts['elements']['total'] += (int)$metric['elements'];
-                $counts['elements']['covered'] += (int)$metric['coveredelements'];
+                $counts['elements']['total'] += (int) $metric['elements'];
+                $counts['elements']['covered'] += (int) $metric['coveredelements'];
             }
             if (in_array(self::METRIC_STATEMENTS, $enabled_metrics)) {
-                $counts['statements']['total'] += (int)$metric['statements'];
-                $counts['statements']['covered'] += (int)$metric['coveredstatements'];
+                $counts['statements']['total'] += (int) $metric['statements'];
+                $counts['statements']['covered'] += (int) $metric['coveredstatements'];
             }
             if (in_array(self::METRIC_METHODS, $enabled_metrics)) {
-                $counts['methods']['total'] += (int)$metric['methods'];
-                $counts['methods']['covered'] += (int)$metric['coveredmethods'];
+                $counts['methods']['total'] += (int) $metric['methods'];
+                $counts['methods']['covered'] += (int) $metric['coveredmethods'];
             }
         }
 
-        return array_map(fn(array $count) => new Metric($count['total'], $count['covered']), $counts);
+        return array_map(fn (array $count) => new Metric($count['total'], $count['covered']), $counts);
     }
 
     private function guardValidEnabledMetrics(array $enabled_metrics): void
@@ -55,5 +54,4 @@ class CloverCoverageProcessor implements Processor
             throw new \InvalidArgumentException(sprintf('Invalid metric "%s" for %s. %s allowed', $enabled_metric, self::class, implode(', ', self::DEFAULT_METRICS)));
         }
     }
-
 }

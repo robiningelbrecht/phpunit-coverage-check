@@ -22,5 +22,4 @@ class Metric
     {
         return $this->covered;
     }
-
 }

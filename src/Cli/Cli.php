@@ -16,13 +16,13 @@ class Cli
 
     public function getArguments(): array
     {
-        return array_filter($this->argv, fn(string $argument) => strpos($argument, '--') !== 0);
+        return array_filter($this->argv, fn (string $argument) => 0 !== strpos($argument, '--'));
     }
 
     public function getOptions(): array
     {
         $options = [];
-        $unformatted_options = array_filter($this->argv, fn(string $argument) => strpos($argument, '--') === 0);
+        $unformatted_options = array_filter($this->argv, fn (string $argument) => 0 === strpos($argument, '--'));
 
         foreach ($unformatted_options as $option) {
             [$key, $value] = explode('=', substr($option, 2));

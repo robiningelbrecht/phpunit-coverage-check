@@ -12,13 +12,13 @@ const STATUS_ERROR = 1;
 $cwd = isset($_SERVER['PWD']) && is_dir($_SERVER['PWD']) ? $_SERVER['PWD'] : getcwd();
 // Set up autoloader
 $loader = false;
-if (file_exists($autoloadFile = __DIR__ . '/vendor/autoload.php')
-    || file_exists($autoloadFile = __DIR__ . '/../autoload.php')
-    || file_exists($autoloadFile = __DIR__ . '/../../autoload.php')
+if (file_exists($autoloadFile = __DIR__.'/vendor/autoload.php')
+    || file_exists($autoloadFile = __DIR__.'/../autoload.php')
+    || file_exists($autoloadFile = __DIR__.'/../../autoload.php')
 ) {
-    $loader = include_once($autoloadFile);
+    $loader = include_once $autoloadFile;
 } else {
-    throw new \Exception("Could not locate autoload.php. cwd is $cwd; __DIR__ is " . __DIR__);
+    throw new \Exception("Could not locate autoload.php. cwd is $cwd; __DIR__ is ".__DIR__);
 }
 
 $cli = new Cli(new CliColors());

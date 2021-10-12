@@ -11,7 +11,7 @@ abstract class ProcessorFactory
 
     public static function fromString(string $string): Processor
     {
-        if ($string === self::CLOVER_COVERAGE) {
+        if (ProcessorType::cloverCoverage() == $string) {
             return new CloverCoverageProcessor();
         }
 

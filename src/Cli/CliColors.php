@@ -38,19 +38,19 @@ class CliColors
 
     public function getColoredString($string, $foregroundColor = null, $backgroundColor = null): string
     {
-        $colored_string = "";
+        $colored_string = '';
 
         // Check if given foreground color found
         if (isset($this->foregroundColors[$foregroundColor])) {
-            $colored_string .= "\033[" . $this->foregroundColors[$foregroundColor] . "m";
+            $colored_string .= "\033[".$this->foregroundColors[$foregroundColor].'m';
         }
         // Check if given background color found
         if (isset($this->backgroundColors[$backgroundColor])) {
-            $colored_string .= "\033[" . $this->backgroundColors[$backgroundColor] . "m";
+            $colored_string .= "\033[".$this->backgroundColors[$backgroundColor].'m';
         }
 
         // Add string and end coloring
-        $colored_string .= $string . "\033[0m";
+        $colored_string .= $string."\033[0m";
 
         return $colored_string;
     }
