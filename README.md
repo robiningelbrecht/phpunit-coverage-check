@@ -23,6 +23,7 @@ vendor/bin/phpunit --coverage-clover clover.xml
 vendor/bin/coverage-checker clover.xml 80
 vendor/bin/coverage-checker clover.xml 80 --formatter=only-percentage
 vendor/bin/coverage-checker clover.xml 80 --formatter=message --processor=clover-coverage --exit-on-low-coverage
+vendor/bin/coverage-checker clover.xml 80 --formatter=message --processor=clover-coverage --enabled-metrics=methods,statements --exit-on-low-coverage
 ```
 
 With the `--only-percentage` enabled, the CLI command will only return the resulting coverage percentage.

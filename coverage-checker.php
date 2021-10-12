@@ -28,7 +28,7 @@ try {
         $cli->getArguments(),
         $cli->getOptions()
     );
-} catch (InvalidArgumentException $e) {
+} catch (Exception $e) {
     $cli->error($e->getMessage());
     exit(STATUS_ERROR);
 }

@@ -14,45 +14,42 @@ class CoverageChecker
     private float $minPercentage;
     private Formatter $formatter;
     private Processor $processor;
-    private Metrics $metrics;
+    /**
+     * @var Metric[]
+     */
+    private array $metrics;
     private string $output;
 
     private function __construct(
         string $file,
-        float $minPercentage,
+        float $min_percentage,
         Formatter $formatter,
-        Processor $processor)
+        Processor $processor,
+        array $enabled_metrics = [])
     {
         $this->file = $file;
-        $this->minPercentage = $minPercentage;
+        $this->minPercentage = $min_percentage;
         $this->formatter = $formatter;
         $this->processor = $processor;
 
-        $this->metrics = $this->getMetrics();
+        $this->metrics = $this->processor->getMetrics($this->file, $enabled_metrics);
         $this->output = $this->formatOutput();
     }
 
     private function getActualCoveragePercentage(): float
     {
-        $covered_metrics = $this->metrics->getElements()->getCovered()
-            + $this->metrics->getMethods()->getCovered()
-            + $this->metrics->getStatements()->getCovered();
-
-        $total_metrics = $this->metrics->getElements()->getTotal()
-            + $this->metrics->getMethods()->getTotal()
-            + $this->metrics->getStatements()->getTotal();
+        $covered_metrics = 0;
+        $total_metrics = 0;
+        foreach ($this->metrics as $metric) {
+            $covered_metrics += $metric->getCovered();
+            $total_metrics += $metric->getTotal();
+        }
 
         if ($total_metrics === 0) {
             throw new \Exception('Insufficient data for calculation. Please add more code');
         }
 
-
         return $covered_metrics / $total_metrics * 100;
-    }
-
-    private function getMetrics(): Metrics
-    {
-        return $this->processor->getMetrics($this->file);
     }
 
     private function formatOutput(): string
@@ -87,7 +84,8 @@ class CoverageChecker
             $arguments[0],
             intval($arguments[1]),
             FormatterFactory::fromString($options['formatter']),
-            ProcessorFactory::fromString($options['processor'])
+            ProcessorFactory::fromString($options['processor']),
+            !empty($options['enabled-metrics']) ? explode(',', $options['enabled-metrics']): [],
         );
     }
 
