@@ -20,20 +20,16 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Setup PHP with Xdebug 2.x
+      - name: Setup PHP with Xdebug 3.x
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4'
-          coverage: xdebug3
+          coverage: xdebug
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Install dependencies
+        run: composer install --prefer-dist
+        
+      - name: Run test suite
+        run: vendor/bin/phpunit --coverage-clover clover.xml
