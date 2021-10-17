@@ -2,10 +2,16 @@
 
 namespace PHPUnitCoverageChecker;
 
+use PHPUnitCoverageChecker\Cli\Argument;
+use PHPUnitCoverageChecker\Cli\CliOption;
+use PHPUnitCoverageChecker\Cli\CoverageCheckerCommand;
+use PHPUnitCoverageChecker\Cli\Option;
 use PHPUnitCoverageChecker\Formatter\Formatter;
 use PHPUnitCoverageChecker\Formatter\FormatterFactory;
+use PHPUnitCoverageChecker\Formatter\FormatterType;
 use PHPUnitCoverageChecker\Processor\Processor;
 use PHPUnitCoverageChecker\Processor\ProcessorFactory;
+use PHPUnitCoverageChecker\Processor\ProcessorType;
 
 class CoverageChecker
 {
@@ -70,35 +76,35 @@ class CoverageChecker
         return $this->getActualCoveragePercentage() >= $this->minPercentage;
     }
 
-    public static function fromScriptArguments(array $arguments, array $options = []): self
+    public static function fromCommand(CoverageCheckerCommand $command): self
     {
+        $arguments = $command->getArgumentValues();
         self::guardValidArguments($arguments);
 
         $options = array_merge([
-            'formatter' => FormatterFactory::MESSAGE,
-            'processor' => ProcessorFactory::CLOVER_COVERAGE,
-        ], $options);
+            (string) Option::formatter() => FormatterType::message(),
+            (string) Option::processor() => ProcessorType::cloverCoverage(),
+        ], $command->getOptionValues());
 
         return new self(
-            $arguments[0],
-            intval($arguments[1]),
-            FormatterFactory::fromString($options['formatter']),
-            ProcessorFactory::fromString($options['processor']),
-            !empty($options['enabled-metrics']) ? explode(',', $options['enabled-metrics']) : [],
+            $arguments[(string) Argument::file()],
+            intval($arguments[(string) Argument::percentage()]),
+            FormatterFactory::fromString((string) $options[(string) Option::formatter()]),
+            ProcessorFactory::fromString((string) $options[(string) Option::processor()]),
+            !empty($options[(string) Option::enabledMetrics()]) ? explode(',', $options[(string) CliOption::enabledMetrics()]) : [],
         );
     }
 
     private static function guardValidArguments(array $arguments): void
     {
-        if (empty($arguments[0])) {
-            throw new \InvalidArgumentException('Please provide an input file');
-        }
-        if (!file_exists($arguments[0])) {
-            throw new \InvalidArgumentException(sprintf('Invalid input file "%s" provided.', $arguments[1]));
+        if (!file_exists($arguments[(string) Argument::file()])) {
+            throw new \InvalidArgumentException(sprintf('Invalid input file "%s" provided.', $arguments[(string) Argument::file()]));
         }
 
-        if (!isset($arguments[1]) || !is_numeric($arguments[1]) || intval($arguments[1]) < 1 || intval($arguments[1]) > 100) {
-            throw new \InvalidArgumentException(sprintf('Invalid percentage "%s" provided. Provide an integer between 0 - 100', $arguments[1]));
+        if (!is_numeric($arguments[(string) Argument::percentage()])
+        || intval($arguments[(string) Argument::percentage()]) < 1
+        || intval($arguments[(string) Argument::percentage()]) > 100) {
+            throw new \InvalidArgumentException(sprintf('Invalid percentage "%s" provided. Provide an integer between 0 - 100', $arguments[(string) Argument::percentage()]));
         }
     }
 }

@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-use PHPUnitCoverageChecker\Cli\Cli;
-use PHPUnitCoverageChecker\Cli\CliColors;
+use Ahc\Cli\Output\Writer;
+use PHPUnitCoverageChecker\Cli\CoverageCheckerCommand;
+use PHPUnitCoverageChecker\Cli\ExitStatus;
+use PHPUnitCoverageChecker\Cli\Option;
 use PHPUnitCoverageChecker\CoverageChecker;
-
-const STATUS_OK = 0;
-const STATUS_ERROR = 1;
 
 $cwd = isset($_SERVER['PWD']) && is_dir($_SERVER['PWD']) ? $_SERVER['PWD'] : getcwd();
 // Set up autoloader
@@ -21,24 +20,27 @@ if (file_exists($autoloadFile = __DIR__.'/vendor/autoload.php')
     throw new \Exception("Could not locate autoload.php. cwd is $cwd; __DIR__ is ".__DIR__);
 }
 
-$cli = new Cli(new CliColors());
+$writer = new Writer();
+$command = CoverageCheckerCommand::create();
 
 try {
-    $coverage_checker = CoverageChecker::fromScriptArguments(
-        $cli->getArguments(),
-        $cli->getOptions()
-    );
+    $command->parse($_SERVER['argv']);
+} catch (RuntimeException $e) {
+    $writer->bgRedBold($e->getMessage(), true);
+    exit(ExitStatus::error());
+}
+
+try {
+    $coverage_checker = CoverageChecker::fromCommand($command);
 } catch (Exception $e) {
-    $cli->error($e->getMessage());
-    exit(STATUS_ERROR);
+    $writer->bgRedBold($e->getMessage(), true);
+    exit(ExitStatus::error());
 }
 
 $output = $coverage_checker->getOutput();
-$coverage_checker->validates() ? $cli->success($output) : $cli->error($output);
+$coverage_checker->validates() ? $writer->bgGreenBold($output, true) : $writer->bgRedBold($output, true);
 
-if (array_key_exists('exit-on-low-coverage', $cli->getOptions()) && !$coverage_checker->validates()) {
-    exit(STATUS_ERROR);
+if (array_key_exists((string) Option::exitOnLowCoverage(), $command->getOptionValues()) && !$coverage_checker->validates()) {
+    exit(ExitStatus::error());
 }
-exit(STATUS_OK);
-
-// See calculation: https://confluence.atlassian.com/pages/viewpage.action?pageId=79986990
+exit(ExitStatus::ok());

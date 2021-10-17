@@ -22,6 +22,7 @@
   ],
   "require": {
     "php": ">=7.4",
+    "adhocore/cli": "^0.9.0",
     "myclabs/php-enum": "^1.8"
   },
   "require-dev": {
