@@ -2,7 +2,9 @@
 
 namespace PHPUnitCoverageChecker;
 
-class Metric
+use JsonSerializable;
+
+class Metric implements JsonSerializable
 {
     private int $total;
     private int $covered;
@@ -21,5 +23,13 @@ class Metric
     public function getCovered(): int
     {
         return $this->covered;
+    }
+
+    public function jsonSerialize(): array
+    {
+        return [
+            'total' => $this->getTotal(),
+            'covered' => $this->getCovered(),
+        ];
     }
 }

@@ -8,9 +8,9 @@ class CloverCoverageProcessor implements Processor
 {
     private const XPATH_METRICS = '//metrics';
 
-    private const METRIC_ELEMENTS = 'elements';
-    private const METRIC_STATEMENTS = 'statements';
-    private const METRIC_METHODS = 'methods';
+    public const METRIC_ELEMENTS = 'elements';
+    public const METRIC_STATEMENTS = 'statements';
+    public const METRIC_METHODS = 'methods';
 
     private const DEFAULT_METRICS = [
         self::METRIC_ELEMENTS,

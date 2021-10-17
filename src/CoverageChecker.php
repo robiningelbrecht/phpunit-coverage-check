@@ -3,7 +3,6 @@
 namespace PHPUnitCoverageChecker;
 
 use PHPUnitCoverageChecker\Cli\Argument;
-use PHPUnitCoverageChecker\Cli\CliOption;
 use PHPUnitCoverageChecker\Cli\CoverageCheckerCommand;
 use PHPUnitCoverageChecker\Cli\Option;
 use PHPUnitCoverageChecker\Formatter\Formatter;
@@ -91,7 +90,7 @@ class CoverageChecker
             intval($arguments[(string) Argument::percentage()]),
             FormatterFactory::fromString((string) $options[(string) Option::formatter()]),
             ProcessorFactory::fromString((string) $options[(string) Option::processor()]),
-            !empty($options[(string) Option::enabledMetrics()]) ? explode(',', $options[(string) CliOption::enabledMetrics()]) : [],
+            !empty($options[(string) Option::enabledMetrics()]) ? explode(',', $options[(string) Option::enabledMetrics()]) : [],
         );
     }
 

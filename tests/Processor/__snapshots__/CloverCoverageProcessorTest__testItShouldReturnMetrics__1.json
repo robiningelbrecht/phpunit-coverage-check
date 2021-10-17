@@ -1,0 +1,14 @@
+{
+    "elements": {
+        "total": 186,
+        "covered": 168
+    },
+    "statements": {
+        "total": 156,
+        "covered": 144
+    },
+    "methods": {
+        "total": 30,
+        "covered": 24
+    }
+}
