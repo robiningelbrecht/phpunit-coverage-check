@@ -1,0 +1,6 @@
+{
+    "processor": "clover-coverage",
+    "formatter": "message",
+    "exitOnLowCoverage": true,
+    "enabledMetrics": "one,two,three"
+}
