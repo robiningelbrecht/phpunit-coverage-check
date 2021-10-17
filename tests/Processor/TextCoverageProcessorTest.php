@@ -41,4 +41,14 @@ class TextCoverageProcessorTest extends TestCase
 
         $this->assertMatchesJsonSnapshot(json_encode($metrics));
     }
+
+    public function testItShouldReturnEmptyMetrics(): void
+    {
+        $processor = new TextCoverageProcessor();
+
+        $fileLocation = dirname(dirname(__FILE__)).'/assets';
+        $metrics = $processor->getMetrics($fileLocation.'/text-coverage-invalid.txt');
+
+        $this->assertMatchesJsonSnapshot(json_encode($metrics));
+    }
 }
