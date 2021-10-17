@@ -16,6 +16,6 @@ abstract class FormatterFactory
             return new NoOutputFormatter();
         }
 
-        throw new \InvalidArgumentException(sprintf('Invalid formatter "%s". %s allowed', $string, implode(',', self::ALL)));
+        throw new \InvalidArgumentException(sprintf('Invalid formatter "%s". %s allowed', $string, implode(', ', FormatterType::toArray())));
     }
 }
