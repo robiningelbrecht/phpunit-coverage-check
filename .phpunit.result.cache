@@ -1,1 +1,0 @@
-{"version":1,"defects":{"Tests\\Cli\\CoverageCheckerCommandTest::testItShouldCreateCommandWithOptionsAndArguments":2},"times":{"Tests\\Cli\\CoverageCheckerCommandTest::testItShouldCreateCommandWithOptionsAndArguments":0.008}}

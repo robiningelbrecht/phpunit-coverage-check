@@ -18,4 +18,10 @@ class CoverageCheckerCommandTest extends TestCase
         $this->assertMatchesJsonSnapshot(array_map(fn (Parameter $argument) => $argument->raw(), $command->allArguments()));
         $this->assertMatchesJsonSnapshot(array_map(fn (Parameter $argument) => $argument->raw(), $command->allOptions()));
     }
+
+    public function testItShouldGuardValidOptions(): void{
+        $command = CoverageCheckerCommand::create();
+
+        $command->parse(['bin/coverage-checker','clover.xml', '20', '--formatter=lol']);
+    }
 }
