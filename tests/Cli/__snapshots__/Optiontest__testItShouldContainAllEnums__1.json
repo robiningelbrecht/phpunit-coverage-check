@@ -1,0 +1,6 @@
+{
+    "FORMATTER": "formatter",
+    "PROCESSOR": "processor",
+    "EXIT_ON_LOW_COVERAGE": "exitOnLowCoverage",
+    "ENABLED_METRICS": "enabledMetrics"
+}
