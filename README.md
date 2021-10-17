@@ -33,11 +33,11 @@ Arguments:
   <percentage>                     The coverage threshold that is acceptable. Min = 1, Max = 100
 
 Options:
+  [-f|--formatter]                 Formatter to use ("message" by default)
+  [-p|--processor]                 Processor to use ("clover-coverage" by default)  
   [-m|--enabled-metrics]           Metrics to use when calculating coverage. Defaults to all
   [-elc|--exit-on-low-coverage]    Exit the script when low coverage is detected. Defaults to "true"
-  [-f|--formatter]                 Formatter to use ("message" by default)
   [-h|--help]                      Show help
-  [-p|--processor]                 Processor to use ("clover-coverage" by default)
   [-v|--verbosity]                 Verbosity level
   [-V|--version]                   Show version
 
