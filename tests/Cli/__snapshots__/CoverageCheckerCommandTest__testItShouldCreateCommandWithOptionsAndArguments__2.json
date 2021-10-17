@@ -1,0 +1,9 @@
+{
+    "help": "-h, --help",
+    "version": "-V, --version",
+    "verbosity": "-v, --verbosity",
+    "processor": "-p --processor",
+    "formatter": "-f --formatter",
+    "exitOnLowCoverage": "-elc --exit-on-low-coverage",
+    "enabledMetrics": "-m --enabled-metrics"
+}

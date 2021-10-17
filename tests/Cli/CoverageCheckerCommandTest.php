@@ -15,7 +15,7 @@ class CoverageCheckerCommandTest extends TestCase
     {
         $command = CoverageCheckerCommand::create();
 
-        $this->assertMatchesSnapshot(array_map(fn (Parameter $argument) => $argument->raw(), $command->allArguments()));
-        $this->assertMatchesSnapshot(array_map(fn (Parameter $argument) => $argument->raw(), $command->allOptions()));
+        $this->assertMatchesJsonSnapshot(array_map(fn (Parameter $argument) => $argument->raw(), $command->allArguments()));
+        $this->assertMatchesJsonSnapshot(array_map(fn (Parameter $argument) => $argument->raw(), $command->allOptions()));
     }
 }
