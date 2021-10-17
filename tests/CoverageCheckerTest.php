@@ -2,6 +2,7 @@
 
 namespace Tests;
 
+use Exception;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use PHPUnitCoverageChecker\Cli\CoverageCheckerCommand;
@@ -39,6 +40,24 @@ class CoverageCheckerTest extends TestCase
         CoverageChecker::fromCommand($command);
     }
 
+    public function testItShouldThrowOnEmptyMetrics(): void
+    {
+        $command = CoverageCheckerCommand::create();
+
+        $command->parse([
+            'bin/coverage-checker',
+            __DIR__.'/clover-empty.xml',
+            '20',
+            '--formatter=message',
+            '--processor=clover-coverage',
+            '--exit-on-low-coverage',
+         ]);
+
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Insufficient data for calculation. Please add more code');
+        $coverageChecker = CoverageChecker::fromCommand($command);
+    }
+
     public function testItShouldValidate(): void
     {
         $command = CoverageCheckerCommand::create();
@@ -54,5 +73,24 @@ class CoverageCheckerTest extends TestCase
 
         $coverageChecker = CoverageChecker::fromCommand($command);
         $this->assertTrue($coverageChecker->validates());
+        $this->assertEquals('90.32% test coverage (min required is 20.00%), give yourself a pat on the back', $coverageChecker->getOutput());
+    }
+
+    public function testItShouldNotValidate(): void
+    {
+        $command = CoverageCheckerCommand::create();
+
+        $command->parse([
+            'bin/coverage-checker',
+            __DIR__.'/clover.xml',
+            '100',
+            '--formatter=message',
+            '--processor=clover-coverage',
+            '--exit-on-low-coverage',
+         ]);
+
+        $coverageChecker = CoverageChecker::fromCommand($command);
+        $this->assertFalse($coverageChecker->validates());
+        $this->assertEquals('Expected 100.00% test coverage, got 90.32%', $coverageChecker->getOutput());
     }
 }
