@@ -40,11 +40,11 @@ class CoverageCheckerCommand extends Command
         $options = $this->getOptionValues();
 
         if (!in_array($options[(string) Option::formatter()], FormatterType::toArray())) {
-            throw new RuntimeException(sprintf('Invalid formatter "%s". Valid options are %s', $options[(string) Option::formatter()]->name(), implode(', ', FormatterType::toArray())));
+            throw new RuntimeException(sprintf('Invalid formatter "%s". Valid options are %s', $options[(string) Option::formatter()], implode(', ', FormatterType::toArray())));
         }
 
         if (!in_array($options[(string) Option::processor()], ProcessorType::toArray())) {
-            throw new RuntimeException(sprintf('Invalid processor "%s". Valid options are %s', $options[(string) Option::processor()]->name(), implode(', ', ProcessorType::toArray())));
+            throw new RuntimeException(sprintf('Invalid processor "%s". Valid options are %s', $options[(string) Option::processor()], implode(', ', ProcessorType::toArray())));
         }
     }
 

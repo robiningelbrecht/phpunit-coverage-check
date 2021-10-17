@@ -26,6 +26,12 @@ class CloverCoverageProcessor implements Processor
         $xml = new \SimpleXMLElement(file_get_contents($file));
 
         $counts = [];
+        foreach ($enabled_metrics as $enabled_metric) {
+            $counts[$enabled_metric] = [
+                'total' => 0,
+                'covered' => 0,
+            ];
+        }
         foreach ($xml->xpath(self::XPATH_METRICS) as $metric) {
             if (in_array(self::METRIC_ELEMENTS, $enabled_metrics)) {
                 $counts['elements']['total'] += (int) $metric['elements'];

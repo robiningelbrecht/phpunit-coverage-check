@@ -12,6 +12,9 @@ abstract class FormatterFactory
         if (FormatterType::message() == $string) {
             return new MessageFormatter();
         }
+        if (FormatterType::noOutput() == $string) {
+            return new NoOutputFormatter();
+        }
 
         throw new \InvalidArgumentException(sprintf('Invalid formatter "%s". %s allowed', $string, implode(',', self::ALL)));
     }
