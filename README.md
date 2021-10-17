@@ -12,6 +12,15 @@ The script can be installed using composer. Add this repository as a dependency 
 composer require --dev robiningelbrecht/phpunit-coverage-check
 ```
 # Usage
+
+Generate the coverage file by using phpunit and run the coverage check script:
+
+```bash
+vendor/bin/phpunit --coverage-clover clover.xml
+vendor/bin/coverage-checker clover.xml 80
+```
+# Available arguments and options
+
 ```diff
 Command coverage-checker, version 1.0
 
