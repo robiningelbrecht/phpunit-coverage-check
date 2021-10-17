@@ -49,7 +49,7 @@ class CoverageChecker
             $total_metrics += $metric->getTotal();
         }
 
-        if (0 === $total_metrics) {
+        if (0 == $total_metrics) {
             throw new \Exception('Insufficient data for calculation. Please add more code');
         }
 

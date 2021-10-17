@@ -6,21 +6,21 @@ use JsonSerializable;
 
 class Metric implements JsonSerializable
 {
-    private int $total;
-    private int $covered;
+    private float $total;
+    private float $covered;
 
-    public function __construct(int $total, int $covered)
+    public function __construct(float $total, float $covered)
     {
         $this->total = $total;
         $this->covered = $covered;
     }
 
-    public function getTotal(): int
+    public function getTotal(): float
     {
         return $this->total;
     }
 
-    public function getCovered(): int
+    public function getCovered(): float
     {
         return $this->covered;
     }

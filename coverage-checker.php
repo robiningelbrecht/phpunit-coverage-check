@@ -41,7 +41,7 @@ if ($output = $coverage_checker->getOutput()) {
     $coverage_checker->validates() ? $writer->bgGreenBold($output, true) : $writer->bgRedBold($output, true);
 }
 
-if (array_key_exists((string) Option::exitOnLowCoverage(), $command->getOptionValues()) && !$coverage_checker->validates()) {
+if (!empty($command->getOptionValues()[(string) Option::exitOnLowCoverage()]) && !$coverage_checker->validates()) {
     exit(ExitStatus::error());
 }
 exit(ExitStatus::ok());

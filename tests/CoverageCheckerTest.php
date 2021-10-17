@@ -31,7 +31,7 @@ class CoverageCheckerTest extends TestCase
 
         $command->parse([
             'bin/coverage-checker',
-            __DIR__.'/clover.xml',
+            __DIR__.'/assets/clover.xml',
             'not-numeric',
          ]);
 
@@ -46,7 +46,7 @@ class CoverageCheckerTest extends TestCase
 
         $command->parse([
             'bin/coverage-checker',
-            __DIR__.'/clover-empty.xml',
+            __DIR__.'/assets/clover-empty.xml',
             '20',
             '--formatter=message',
             '--processor=clover-coverage',
@@ -64,7 +64,7 @@ class CoverageCheckerTest extends TestCase
 
         $command->parse([
             'bin/coverage-checker',
-            __DIR__.'/clover.xml',
+            __DIR__.'/assets/clover.xml',
             '20',
             '--formatter=message',
             '--processor=clover-coverage',
@@ -82,7 +82,7 @@ class CoverageCheckerTest extends TestCase
 
         $command->parse([
             'bin/coverage-checker',
-            __DIR__.'/clover.xml',
+            __DIR__.'/assets/clover.xml',
             '100',
             '--formatter=message',
             '--processor=clover-coverage',

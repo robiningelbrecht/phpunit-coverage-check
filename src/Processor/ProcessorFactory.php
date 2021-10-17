@@ -9,6 +9,9 @@ abstract class ProcessorFactory
         if (ProcessorType::cloverCoverage() == $string) {
             return new CloverCoverageProcessor();
         }
+        if (ProcessorType::textCoverage() == $string) {
+            return new TextCoverageProcessor();
+        }
 
         throw new \InvalidArgumentException(sprintf('Invalid processor "%s". %s allowed', $string, implode(', ', ProcessorType::toArray())));
     }
