@@ -60,7 +60,7 @@ class CoverageCheckerCommand extends Command
             ->arguments('<file> <percentage>')
             ->option('-p --processor', sprintf('Processor to use ("%s" by default)', ProcessorType::cloverCoverage()), null, ProcessorType::cloverCoverage())
             ->option('-f --formatter', sprintf('Formatter to use ("%s" by default)', FormatterType::message()), null, FormatterType::message())
-            ->option('-elc --exit-on-low-coverage', 'Exit the script when low coverage is detected. Defaults to "true"', null, true)
+            ->option('-elc --exit-on-low-coverage', 'Exit the script when low coverage is detected. Defaults to "false"', null, false)
             ->option('-m --enabled-metrics', 'Metrics to use when calculating coverage. Defaults to all');
 
         return $command;

@@ -36,7 +36,7 @@ Options:
   [-f|--formatter]                 Formatter to use ("message" by default)
   [-p|--processor]                 Processor to use ("clover-coverage" by default)  
   [-m|--enabled-metrics]           Metrics to use when calculating coverage. Defaults to all
-  [-elc|--exit-on-low-coverage]    Exit the script when low coverage is detected. Defaults to "true"
+  [-elc|--exit-on-low-coverage]    Exit the script when low coverage is detected. Defaults to "false"
   [-h|--help]                      Show help
   [-v|--verbosity]                 Verbosity level
   [-V|--version]                   Show version

@@ -44,4 +44,3 @@ if ($output = $coverage_checker->getOutput()) {
 if (!empty($command->getOptionValues()[(string) Option::exitOnLowCoverage()]) && !$coverage_checker->validates()) {
     exit(ExitStatus::error());
 }
-exit(ExitStatus::ok());
