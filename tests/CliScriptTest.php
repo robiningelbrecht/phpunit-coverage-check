@@ -18,6 +18,12 @@ class CliScriptTest extends TestCase
         $this->assertFalse($this->endsWith($output, '0'));
     }
 
+    public function testItShouldExitWithoutErrorAgain(): void
+    {
+        $output = shell_exec(dirname(dirname(__FILE__)).'/bin/coverage-checker '.__DIR__.'/assets/clover.xml 100');
+        $this->assertFalse($this->endsWith($output, '0'));
+    }
+
     private function endsWith($haystack, $needle)
     {
         $length = strlen($needle);
