@@ -9,7 +9,7 @@ This script can be used in your continuous deployment environment or for example
 The script can be installed using composer. Add this repository as a dependency to the composer.json file.
 
 ```bash
-composer require --dev robiningelbrecht/phpunit-coverage-check
+composer require --dev robiningelbrecht/phpunit-coverage-check dev-master
 ```
 # Usage
 
